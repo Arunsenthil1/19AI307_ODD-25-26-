@@ -31,8 +31,8 @@ To write a Java program to demonstrate **data hiding using private access specif
 ```java
 /*
 Program to implement a Access Specifiers using Java
-Developed by: BALAMURUGAN P
-RegisterNumber: 212224040044 
+Developed by: ARUN S
+RegisterNumber: 212224230023
 */
 
 import java.util.Scanner;
