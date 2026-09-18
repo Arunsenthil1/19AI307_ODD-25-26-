@@ -1,27 +1,31 @@
-# Ex.No:2(A) CLASS AND OBJECT
+# Ex.No:3(A) INHERITANCE AND AGGREGATION
 
 ## QUESTION:
-Write a Java program to demonstrate the concept of **class and object** by storing and displaying vehicle details.
+Write a Java program to demonstrate **inheritance and aggregation** by calculating the final order amount for different types of users in a food delivery system.
 
 ---
 
 ## AIM:
-To write a Java program to demonstrate the **class and object concept by creating objects and accessing their attributes**.
+To write a Java program to demonstrate **inheritance and aggregation concepts using a food delivery order system**.
 
 ---
 
 ## ALGORITHM :
 1. Start the program.  
-2. Import the necessary package `java.util`.  
-3. Create a class named `Main`.  
-4. Define an inner class `Vehicle` with attributes `number`, `type`, and `owner`.  
-5. Inside the `main()` method create a `Scanner` object.  
-6. Create the first object `v1` of class `Vehicle`.  
-7. Read vehicle number, type, and owner name for `v1`.  
-8. Create the second object `v2` of class `Vehicle`.  
-9. Read vehicle number, type, and owner name for `v2`.  
-10. Display the details of both vehicles using the object variables.  
-11. Stop the program.
+2. Import the necessary packages `java.util` and `java.text`.  
+3. Create a base class `Order` with attributes `orderId`, `customerName`, `totalAmount`, and `deliveryCharge`.  
+4. Create a constructor to initialize these variables.  
+5. Create a method `calculateFinalAmount()` to calculate the total order amount.  
+6. Create a method `display()` to display order details.  
+7. Create a subclass `NormalUser` that extends `Order`.  
+8. Override the `display()` method to show details for a normal user.  
+9. Create another subclass `PrimeUser` that extends `Order`.  
+10. Override the `calculateFinalAmount()` method to apply a **50% discount on delivery charge**.  
+11. Override the `display()` method to display prime user details.  
+12. In the main class, read user type and order details from the user.  
+13. Create the appropriate object (`PrimeUser` or `NormalUser`) based on user type.  
+14. Call the `display()` method to print order details.  
+15. Stop the program.
 
 ---
 
@@ -29,35 +33,90 @@ To write a Java program to demonstrate the **class and object concept by creatin
 
 ```java
 /*
-Program to implement a Class and Objects using Java
+Program to implement a Inheritance and Aggregation using Java
 Developed by: ARUN S
 RegisterNumber: 212224230023
 */
 
 import java.util.Scanner;
+import java.text.DecimalFormat;
 
-public class Main {
-    public static class Vehicle{
-        String number;
-        String type;
-        String owner;
+class Order {
+    String orderId;
+    String customerName;
+    double totalAmount;
+    double deliveryCharge;
+
+    public Order(String orderId, String customerName, double totalAmount, double deliveryCharge) {
+        this.orderId = orderId;
+        this.customerName = customerName;
+        this.totalAmount = totalAmount;
+        this.deliveryCharge = deliveryCharge;
     }
 
+    double calculateFinalAmount() {
+        return totalAmount + deliveryCharge;
+    }
+
+    void display(String userType) {
+        DecimalFormat df = new DecimalFormat("0.00");
+        System.out.println("Order ID: " + orderId);
+        System.out.println("Customer Name: " + customerName);
+        System.out.println("User Type: " + userType);
+        System.out.println("Total Amount: " + totalAmount);
+        System.out.println("Delivery Charge: " + deliveryCharge);
+        System.out.println("Final Amount: " + df.format(calculateFinalAmount()));
+    }
+}
+
+class NormalUser extends Order {
+    public NormalUser(String orderId, String customerName, double totalAmount, double deliveryCharge) {
+        super(orderId, customerName, totalAmount, deliveryCharge);
+    }
+
+    @Override
+    void display(String userType) {
+        super.display("Normal");
+    }
+}
+
+class PrimeUser extends Order {
+    public PrimeUser(String orderId, String customerName, double totalAmount, double deliveryCharge) {
+        super(orderId, customerName, totalAmount, deliveryCharge);
+    }
+
+    @Override
+    double calculateFinalAmount() {
+        return totalAmount + (deliveryCharge * 0.5);
+    }
+
+    @Override
+    void display(String userType) {
+        DecimalFormat df = new DecimalFormat("0.00");
+        System.out.println("Order ID: " + orderId);
+        System.out.println("Customer Name: " + customerName);
+        System.out.println("User Type: Prime");
+        System.out.println("Total Amount: " + totalAmount);
+        System.out.println("Delivery Charge: " + deliveryCharge);
+        System.out.println("Final Amount: " + df.format(calculateFinalAmount()));
+    }
+}
+
+public class FoodDeliveryApp {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        Vehicle v1 = new Vehicle();
-        v1.number = sc.next();
-        v1.type = sc.next();
-        v1.owner = sc.next();
+        String type1 = sc.next();
+        String id1 = sc.next();
+        String name1 = sc.next();
+        double amount1 = sc.nextDouble();
+        double charge1 = sc.nextDouble();
 
-        Vehicle v2 = new Vehicle();
-        v2.number = sc.next();
-        v2.type = sc.next();
-        v2.owner = sc.next();
+        Order o1 = type1.equalsIgnoreCase("Prime")
+                ? new PrimeUser(id1, name1, amount1, charge1)
+                : new NormalUser(id1, name1, amount1, charge1);
 
-        System.out.println(v1.number + " | " + v1.type + " | " + v1.owner);
-        System.out.println(v2.number + " | " + v2.type + " | " + v2.owner);
+        o1.display(type1);
 
         sc.close();
     }
@@ -71,13 +130,13 @@ public class Main {
 Compile the program using
 
 ```
-javac Main.java
+javac FoodDeliveryApp.java
 ```
 
 Run the program using
 
 ```
-java Main
+java FoodDeliveryApp
 ```
 
 ---
@@ -85,18 +144,21 @@ java Main
 ## OUTPUT:
 
 ```
-TN01AB1234
-Car
-Ramesh
-TN10CD5678
-Bike
-Suresh
-TN01AB1234 | Car | Ramesh
-TN10CD5678 | Bike | Suresh
+Prime
+ORD101
+Ravi
+500
+50
+Order ID: ORD101
+Customer Name: Ravi
+User Type: Prime
+Total Amount: 500.0
+Delivery Charge: 50.0
+Final Amount: 525.00
 ```
 
 ---
 
 ## RESULT:
 
-Thus, the Java program to demonstrate the **class and object concept** was executed successfully and the output was verified.
+Thus, the Java program to demonstrate **inheritance and aggregation** was executed successfully and the output was verified.
