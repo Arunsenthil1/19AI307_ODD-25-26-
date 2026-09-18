@@ -32,8 +32,8 @@ To write a Java program to demonstrate **access modifiers by accessing class mem
 ```java
 /*
 Program to implement a Access Modifiers using Java
-Developed by: BALAMURUGAN P
-RegisterNumber: 212224040044 
+Developed by: ARUN S
+RegisterNumber: 212224230023
 */
 
 import java.util.Scanner;
