@@ -27,8 +27,8 @@ To write a Java program to demonstrate the **class and object concept using stat
 ```java
 /*
 Program to implement a Class and Objects using Java
-Developed by: BALAMURUGAN P
-RegisterNumber: 212224040044  
+Developed by: ARUN S
+RegisterNumber: 212224230023
 */
 
 public class Main{
